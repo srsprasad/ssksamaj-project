@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ssksamaj.app.beans.Organization;
+import org.ssksamaj.app.beans.OrganizationBean;
 import org.ssksamaj.app.manager.OrganizationManager;
 
 @RestController
@@ -24,17 +24,17 @@ public class OrganizationController {
 	private OrganizationManager organizationManager;
 	
 	@GetMapping(value = "/all", produces = {"application/json"})
-	public ResponseEntity<List<Organization>> getAll() {
+	public ResponseEntity<List<OrganizationBean>> getAll() {
 		return ResponseEntity.ok(organizationManager.fetchAll());
 	}
 	
 	@GetMapping(value = "/find/{id}", produces = {"application/json"})
-	public ResponseEntity<Organization> find(@PathVariable Integer id) {
+	public ResponseEntity<OrganizationBean> find(@PathVariable Integer id) {
 		return ResponseEntity.ok(organizationManager.find(id));
 	}
 	
 	@PostMapping(value = "/create", consumes = {"application/json"}, produces = {"application/json"})
-	public String create(@RequestBody Organization organization) {
+	public String create(@RequestBody OrganizationBean organization) {
 		LOG.info("Received Object: " + organization);
 		return "Successfully created with ID: " + organizationManager.create(organization);
 	}

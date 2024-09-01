@@ -2,12 +2,13 @@ package org.ssksamaj.app.beans;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 
-public class Organization implements Serializable {
+public class OrganizationBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,6 +18,7 @@ public class Organization implements Serializable {
 	private String address;
 	private String description;
 	private LocalDateTime localDateTime;
+	List<UserBean> allUserBeans;
 	
 	public Integer getId() {
 		return id;
@@ -53,6 +55,12 @@ public class Organization implements Serializable {
 	}
 	public void setLocalDateTime(LocalDateTime localDateTime) {
 		this.localDateTime = localDateTime;
+	}
+	public List<UserBean> getAllUserBeans() {
+		return allUserBeans;
+	}
+	public void setAllUserBeans(List<UserBean> allUserBeans) {
+		this.allUserBeans = allUserBeans;
 	}
 	
 	@Override

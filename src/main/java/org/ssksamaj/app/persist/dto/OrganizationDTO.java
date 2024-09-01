@@ -2,16 +2,15 @@ package org.ssksamaj.app.persist.dto;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-
-import org.springframework.data.annotation.AccessType;
-import org.springframework.data.annotation.AccessType.Type;
-import org.springframework.data.annotation.Transient;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,7 +22,7 @@ public class OrganizationDTO implements Serializable {
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Column(name="TITLE")
 	private String name;
 	@Column(name="LOCATION_NAME")
@@ -36,12 +35,15 @@ public class OrganizationDTO implements Serializable {
 	private int updatedBy;
 	@Column(name="LAST_UPDATED")
 	private OffsetDateTime lastUpdated;
+	@OneToMany
+	@JoinColumn(name = "ORGN_ID")
+	private List<UserDTO> allUserDTOs;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -90,6 +92,10 @@ public class OrganizationDTO implements Serializable {
 
 	public void setLastUpdated(OffsetDateTime lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}
+	
+	public List<UserDTO> getAllUserDTOs() {
+		return this.allUserDTOs;
 	}
 
 }
