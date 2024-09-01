@@ -1,0 +1,8 @@
+server:
+  port: 8082
+db:
+  jdbcUrl: jdbc:postgresql://localhost:5432/ssksamaj_db
+  username: ssksadmin
+  password: ssksadmin
+  driverClassName: org.postgresql.Driver
+  defaultSchema: mrpt 	
