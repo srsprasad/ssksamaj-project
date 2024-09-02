@@ -3,6 +3,7 @@ package org.ssksamaj.app.beans;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -24,6 +25,7 @@ public class UserBean implements Serializable {
 	private String password;
 	private String enabled;
 	private Integer organizationId;
+	private List<GroupMemberBean> memberGroups;
 	private LocalDateTime lastUpdated;
 	public Integer getId() {
 		return id;
@@ -108,6 +110,12 @@ public class UserBean implements Serializable {
 	}
 	public void setLastUpdated(LocalDateTime lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}
+	public List<GroupMemberBean> getMemberGroups() {
+		return memberGroups;
+	}
+	public void setMemberGroups(List<GroupMemberBean> memberGroups) {
+		this.memberGroups = memberGroups;
 	}
 	
 	@Override

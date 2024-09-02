@@ -3,6 +3,7 @@ package org.ssksamaj.app.persist.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.Set;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -16,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,7 +42,7 @@ public class UserDTO implements Serializable {
 	private OrganizationDTO organizationDTO;
 	private int updatedBy;
 	private OffsetDateTime lastUpdated;
-	
+	private Set<GroupMemberDTO> groupMemberDTOList;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -162,7 +164,14 @@ public class UserDTO implements Serializable {
 	public void setLastUpdated(OffsetDateTime lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
-	
+	@OneToMany(orphanRemoval = true)
+	@JoinColumn(name = "USER_ID")
+	public Set<GroupMemberDTO> getGroupMemberDTOList() {
+		return groupMemberDTOList;
+	}
+	public void setGroupMemberDTOList(Set<GroupMemberDTO> groupMemberDTOList) {
+		this.groupMemberDTOList = groupMemberDTOList;
+	}
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
