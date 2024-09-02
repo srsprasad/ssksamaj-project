@@ -10,10 +10,10 @@ import org.ssksamaj.app.beans.GroupAuthorityBean;
 import org.ssksamaj.app.beans.GroupMemberBean;
 import org.ssksamaj.app.manager.converter.BeanConverter;
 import org.ssksamaj.app.manager.converter.DTOConverter;
-import org.ssksamaj.app.persist.GroupAuthorityRepository;
 import org.ssksamaj.app.persist.dto.GroupAuthorityDTO;
 import org.ssksamaj.app.persist.dto.GroupAuthorityId;
 import org.ssksamaj.app.persist.repository.AuthorityGroupRepository;
+import org.ssksamaj.app.persist.repository.GroupAuthorityRepository;
 import org.ssksamaj.app.persist.repository.GroupMemberRepository;
 
 @Service
