@@ -1,3 +1,4 @@
 # Ignore build output and IDE settings
 target/
 .vscode/
+.data/

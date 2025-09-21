@@ -1,41 +1,45 @@
 package org.ssksamaj.app.controller;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.ssksamaj.app.beans.OrganizationBean;
 import org.ssksamaj.app.manager.OrganizationManager;
 
-@RestController
-@RequestMapping("/organization")
-public class OrganizationController {
-	private static final Logger LOG = LoggerFactory.getLogger(OrganizationController.class);
+import java.util.List;
 
-	@Autowired
-	private OrganizationManager organizationManager;
-	
-	@GetMapping(value = "/all", produces = {"application/json"})
-	public ResponseEntity<List<OrganizationBean>> getAll() {
-		return ResponseEntity.ok(organizationManager.fetchAll());
-	}
-	
-	@GetMapping(value = "/find/{id}", produces = {"application/json"})
-	public ResponseEntity<OrganizationBean> find(@PathVariable Integer id) {
-		return ResponseEntity.ok(organizationManager.find(id));
-	}
-	
-	@PostMapping(value = "/create", consumes = {"application/json"}, produces = {"application/json"})
-	public String create(@RequestBody OrganizationBean organization) {
-		LOG.info("Received Object: " + organization);
-		return "Successfully created with ID: " + organizationManager.create(organization);
-	}
+@RestController
+@RequestMapping("/api/organization")
+@RequiredArgsConstructor
+public class OrganizationController {
+
+    private final OrganizationManager organizationManager;
+
+    @PostMapping
+    public ResponseEntity<OrganizationBean> create(@RequestBody OrganizationBean bean) {
+        return ResponseEntity.ok(organizationManager.save(bean));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OrganizationBean> getById(@PathVariable Long id) {
+        return organizationManager.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<OrganizationBean>> getAll() {
+        return ResponseEntity.ok(organizationManager.findAll());
+    }
+
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<OrganizationBean> getByName(@PathVariable String name) {
+        return ResponseEntity.ok(organizationManager.findByName(name));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        organizationManager.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

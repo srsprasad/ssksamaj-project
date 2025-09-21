@@ -4,10 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrganizationBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,55 +24,8 @@ public class OrganizationBean implements Serializable {
 	private String address;
 	private String description;
 	private LocalDateTime localDateTime;
-	List<MemberBean> allMemberBeans;
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getLocationName() {
-		return locationName;
-	}
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
-	}
-	public void setLocalDateTime(LocalDateTime localDateTime) {
-		this.localDateTime = localDateTime;
-	}
-	public List<MemberBean> getAllMemberBeans() {
-		return allMemberBeans;
-	}
-	public void setAllMemberBeans(List<MemberBean> allMemberBeans) {
-		this.allMemberBeans = allMemberBeans;
-	}
-	
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
-	
+	private List<MemberBean> allMemberBeans;
+	private List<ChitBean> chits;
+		
 
 }

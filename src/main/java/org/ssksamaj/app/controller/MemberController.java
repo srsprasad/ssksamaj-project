@@ -1,37 +1,45 @@
 package org.ssksamaj.app.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.ssksamaj.app.beans.MemberBean;
 import org.ssksamaj.app.manager.MemberManager;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/api/member")
+@RequiredArgsConstructor
 public class MemberController {
 
-	@Autowired
-	private MemberManager memberManager;
-	
-	@GetMapping(value = "/all", produces = {"application/json"})
-	public ResponseEntity<List<MemberBean>> getAll() {
-	return ResponseEntity.ok(memberManager.fetchAll());
-	}
-	
-	@GetMapping(value = "/find/{id}", produces = {"application/json"})
-	public ResponseEntity<MemberBean> find(@PathVariable("id") Integer id) {
-	return ResponseEntity.ok(memberManager.find(id));
-	}
-	
-	@PostMapping(value = "/create", consumes = {"application/json"})
-	public ResponseEntity<Integer> create(@RequestBody MemberBean memberBean) {
-	return ResponseEntity.ofNullable(memberManager.create(memberBean));
-	}
+    private final MemberManager memberManager;
+
+    @PostMapping
+    public ResponseEntity<MemberBean> create(@RequestBody MemberBean bean) {
+        return ResponseEntity.ok(memberManager.save(bean));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MemberBean> getById(@PathVariable Long id) {
+        return memberManager.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MemberBean>> getAll() {
+        return ResponseEntity.ok(memberManager.findAll());
+    }
+
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<MemberBean> getByName(@PathVariable String name) {
+        return ResponseEntity.ok(memberManager.findByName(name));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        memberManager.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

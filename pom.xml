@@ -85,6 +85,25 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j2-impl</artifactId>
     </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.36</version> <!-- Use the latest stable version -->
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>1.6.2</version> <!-- Use the latest stable version -->
+    </dependency>
+
+    <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-processor</artifactId>
+        <version>1.6.2</version> <!-- Use the same version as mapstruct -->
+        <scope>provided</scope>
+    </dependency>
+
   </dependencies>
     
   <build>
@@ -93,6 +112,20 @@
   	    <groupId>org.springframework.boot</groupId>
   	    <artifactId>spring-boot-maven-plugin</artifactId>
   	  </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version> <!-- Or a suitable version -->
+        <configuration>
+            <annotationProcessorPaths>
+                <path>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                    <version>1.18.36</version> <!-- Use the same version as above -->
+                </path>
+            </annotationProcessorPaths>
+        </configuration>
+      </plugin>
   	</plugins>
   </build>
   

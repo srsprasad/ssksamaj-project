@@ -1,9 +1,11 @@
 package org.ssksamaj.app.persist.dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,10 +13,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="ORGANIZATION")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrganizationDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,63 +50,7 @@ public class OrganizationDTO implements Serializable {
 	@JoinColumn(name = "ORGN_ID")
 	private List<MemberDTO> allMemberDTOs;
 	
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(int updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	public OffsetDateTime getLastUpdated() {
-		return this.lastUpdated;
-	}
-
-	public void setLastUpdated(OffsetDateTime lastUpdated) {
-		this.lastUpdated = lastUpdated;
-	}
-	
-	public List<MemberDTO> getAllMemberDTOs() {
-		return this.allMemberDTOs;
-	}
+	@OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChitDTO> chits;
 
 }

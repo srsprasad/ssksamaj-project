@@ -1,34 +1,44 @@
 package org.ssksamaj.app.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.ssksamaj.app.beans.OrganizationBean;
-import org.ssksamaj.app.manager.converter.BeanConverter;
-import org.ssksamaj.app.manager.converter.DTOConverter;
+import org.ssksamaj.app.manager.converter.OrganizationConverter;
+import org.ssksamaj.app.persist.dto.OrganizationDTO;
 import org.ssksamaj.app.persist.repository.OrganizationRepository;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
+@RequiredArgsConstructor
 public class OrganizationManager {
 
-	@Autowired
-	private OrganizationRepository organizationRepository;
+    private final OrganizationRepository organizationRepository;
+    private final OrganizationConverter organizationConverter;
 
-	public List<OrganizationBean> fetchAll() {
-		List<OrganizationBean> orgs = new ArrayList<>();
-		organizationRepository.findAll().forEach(orgDTO -> orgs.add(DTOConverter.toOrganisationBean(orgDTO)));
-		return orgs;
+    public OrganizationBean save(OrganizationBean organizationBean) {
+        OrganizationDTO dto = organizationConverter.toDTO(organizationBean);
+        return organizationConverter.toBean(organizationRepository.save(dto));
+    }
 
-	}
+    public Optional<OrganizationBean> findById(Long id) {
+        return organizationRepository.findById(id).map(organizationConverter::toBean);
+    }
 
-	public OrganizationBean find(Integer id) {
-		return DTOConverter.toOrganisationBean(organizationRepository.findById(id).get());
-	}
+    public List<OrganizationBean> findAll() {
+        return organizationRepository.findAll()
+                .stream()
+                .map(organizationConverter::toBean)
+                .collect(Collectors.toList());
+    }
 
-	public Integer create(final OrganizationBean organization) {
-		return organizationRepository.save(BeanConverter.toOrganisationDTO(organization)).getId();
-	}
+    public OrganizationBean findByName(String name) {
+        return organizationConverter.toBean(organizationRepository.findByName(name));
+    }
 
+    public void deleteById(Long id) {
+        organizationRepository.deleteById(id);
+    }
 }

@@ -8,6 +8,15 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MemberBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +36,8 @@ public class MemberBean implements Serializable {
 	private Integer organizationId;
 	private List<GroupMemberBean> memberGroups;
 	private LocalDateTime lastUpdated;
+	private List<ChitRenewalMembersBean> renewalMemberships;
+
 	public Integer getId() {
 		return id;
 	}
