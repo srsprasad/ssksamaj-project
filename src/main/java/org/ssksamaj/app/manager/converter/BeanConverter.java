@@ -6,12 +6,12 @@ import org.ssksamaj.app.beans.AuthorityGroupBean;
 import org.ssksamaj.app.beans.GroupAuthorityBean;
 import org.ssksamaj.app.beans.GroupMemberBean;
 import org.ssksamaj.app.beans.OrganizationBean;
-import org.ssksamaj.app.beans.UserBean;
+import org.ssksamaj.app.beans.MemberBean;
 import org.ssksamaj.app.persist.dto.AuthorityGroupDTO;
 import org.ssksamaj.app.persist.dto.GroupAuthorityDTO;
 import org.ssksamaj.app.persist.dto.GroupMemberDTO;
 import org.ssksamaj.app.persist.dto.OrganizationDTO;
-import org.ssksamaj.app.persist.dto.UserDTO;
+import org.ssksamaj.app.persist.dto.MemberDTO;
 
 public final class BeanConverter {
 
@@ -27,26 +27,26 @@ public final class BeanConverter {
 		return orgDTO;
 	}
 
-	public static UserDTO toUserDTO(UserBean userBean) {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setId(userBean.getId());
-		userDTO.setGender(userBean.getGender());
-		userDTO.setSurname(userBean.getSurname());
-		userDTO.setGivenname(userBean.getGivenname());
-		userDTO.setGothraname(userBean.getGothraname());
-		userDTO.setDateOfBirth(userBean.getDateOfBirth());
-		userDTO.setEmail(userBean.getEmail());
-		userDTO.setPhone(userBean.getPhone());
-		userDTO.setAddress(userBean.getAddress());
-		userDTO.setUsername(userBean.getUsername());
-		userDTO.setPassword(userBean.getPassword());
-		userDTO.setEnabled(userBean.getEnabled());
+	public static MemberDTO toMemberDTO(MemberBean memberBean) {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(memberBean.getId());
+		memberDTO.setGender(memberBean.getGender());
+		memberDTO.setSurname(memberBean.getSurname());
+		memberDTO.setGivenname(memberBean.getGivenname());
+		memberDTO.setGothraname(memberBean.getGothraname());
+		memberDTO.setDateOfBirth(memberBean.getDateOfBirth());
+		memberDTO.setEmail(memberBean.getEmail());
+		memberDTO.setPhone(memberBean.getPhone());
+		memberDTO.setAddress(memberBean.getAddress());
+		memberDTO.setUsername(memberBean.getUsername());
+		memberDTO.setPassword(memberBean.getPassword());
+		memberDTO.setEnabled(memberBean.getEnabled());
 		OrganizationBean orgBean = new OrganizationBean();
-		orgBean.setId(userBean.getOrganizationId());
-		userDTO.setOrganizationDTO(toOrganisationDTO(orgBean));
-		userDTO.setUpdatedBy(1);
-		userDTO.setLastUpdated(OffsetDateTime.now());
-		return userDTO;
+		orgBean.setId(memberBean.getOrganizationId());
+		memberDTO.setOrganizationDTO(toOrganisationDTO(orgBean));
+		memberDTO.setUpdatedBy(1);
+		memberDTO.setLastUpdated(OffsetDateTime.now());
+		return memberDTO;
 	}
 	
 	public static AuthorityGroupDTO toAuthorityGroupDTO(final AuthorityGroupBean authGrpBean) {
@@ -74,11 +74,11 @@ public final class BeanConverter {
 	public static GroupMemberDTO toGroupMemberDTO(final GroupMemberBean grpMbrBean) {
 		GroupMemberDTO grpMbrDTO = new GroupMemberDTO();
 		AuthorityGroupDTO authGrpDTO = new AuthorityGroupDTO();
-		UserDTO usrDTO = new UserDTO();
+	MemberDTO usrDTO = new MemberDTO();
 		authGrpDTO.setId(grpMbrBean.getAuthorityGroupId());
-		usrDTO.setId(grpMbrBean.getUserId());
+		usrDTO.setId(grpMbrBean.getMemberId());
 		grpMbrDTO.setAuthorityGroupId(authGrpDTO);
-		grpMbrDTO.setUserId(usrDTO);
+		grpMbrDTO.setMemberId(usrDTO);
 		grpMbrDTO.setUpdateBy(1);
 		grpMbrDTO.setLastUpdated(OffsetDateTime.now());
 		return grpMbrDTO;

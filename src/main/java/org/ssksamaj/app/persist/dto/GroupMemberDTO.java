@@ -23,7 +23,7 @@ public class GroupMemberDTO implements Serializable {
 	
 	private Integer id;
 	private AuthorityGroupDTO authorityGroupId;
-	private UserDTO userId;
+	private MemberDTO memberId;
 	private Integer updateBy;
 	private OffsetDateTime lastUpdated;
 	
@@ -47,12 +47,12 @@ public class GroupMemberDTO implements Serializable {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "USER_ID")
-	public UserDTO getUserId() {
-		return userId;
+	@JoinColumn(name = "MEMBER_ID")
+	public MemberDTO getMemberId() {
+		return memberId;
 	}
-	public void setUserId(UserDTO userId) {
-		this.userId = userId;
+	public void setMemberId(MemberDTO userId) {
+		this.memberId = userId;
 	}
 	
 	@Column(name = "UPDATED_BY")

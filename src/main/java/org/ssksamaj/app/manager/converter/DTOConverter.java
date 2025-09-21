@@ -8,12 +8,12 @@ import org.ssksamaj.app.beans.AuthorityGroupBean;
 import org.ssksamaj.app.beans.GroupAuthorityBean;
 import org.ssksamaj.app.beans.GroupMemberBean;
 import org.ssksamaj.app.beans.OrganizationBean;
-import org.ssksamaj.app.beans.UserBean;
+import org.ssksamaj.app.beans.MemberBean;
 import org.ssksamaj.app.persist.dto.AuthorityGroupDTO;
 import org.ssksamaj.app.persist.dto.GroupAuthorityDTO;
 import org.ssksamaj.app.persist.dto.GroupMemberDTO;
 import org.ssksamaj.app.persist.dto.OrganizationDTO;
-import org.ssksamaj.app.persist.dto.UserDTO;
+import org.ssksamaj.app.persist.dto.MemberDTO;
 
 public final class DTOConverter {
 
@@ -24,35 +24,35 @@ public final class DTOConverter {
 		orgBean.setLocationName(orgDTO.getLocationName());
 		orgBean.setAddress(orgDTO.getAddress());
 		orgBean.setDescription(orgDTO.getDescription());
-		List<UserBean> userBeans = new ArrayList<>();
-		orgDTO.getAllUserDTOs().forEach(userDTO -> userBeans.add(toUserBean(userDTO)));
-		orgBean.setAllUserBeans(userBeans);
+		List<MemberBean> memberBeans = new ArrayList<>();
+		orgDTO.getAllMemberDTOs().forEach(memberDTO -> memberBeans.add(toMemberBean(memberDTO)));
+		orgBean.setAllMemberBeans(memberBeans);
 		orgBean.setLocalDateTime(orgDTO.getLastUpdated().atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
 		return orgBean;
 	}
-	
-	public static UserBean toUserBean(UserDTO userDTO) {
-			
-			UserBean userBean = new UserBean();
-			
-			userBean.setId(userDTO.getId());
-			userBean.setGender(userDTO.getGender());
-			userBean.setSurname(userDTO.getSurname());
-			userBean.setGivenname(userDTO.getGivenname());
-			userBean.setGothraname(userDTO.getGothraname());
-			userBean.setDateOfBirth(userDTO.getDateOfBirth());
-			userBean.setEmail(userDTO.getEmail());
-			userBean.setPhone(userDTO.getPhone());
-			userBean.setAddress(userDTO.getAddress());
-			userBean.setUsername(userDTO.getUsername());
-			userBean.setPassword(userDTO.getPassword());
-			userBean.setEnabled(userDTO.getEnabled());
-			userBean.setOrganizationId(userDTO.getOrganizationDTO().getId());
-			List<GroupMemberBean> grpMbrBean = new ArrayList<>();
-			userDTO.getGroupMemberDTOList().forEach(grpMbrDTO -> grpMbrBean.add(toGroupMemberBean(grpMbrDTO)));
-			userBean.setMemberGroups(grpMbrBean);
-			userBean.setLastUpdated(userDTO.getLastUpdated().atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
-			return userBean;
+
+	public static MemberBean toMemberBean(MemberDTO memberDTO) {
+		MemberBean memberBean = new MemberBean();
+		memberBean.setId(memberDTO.getId());
+		memberBean.setGender(memberDTO.getGender());
+		memberBean.setSurname(memberDTO.getSurname());
+		memberBean.setGivenname(memberDTO.getGivenname());
+		memberBean.setGothraname(memberDTO.getGothraname());
+		memberBean.setDateOfBirth(memberDTO.getDateOfBirth());
+		memberBean.setEmail(memberDTO.getEmail());
+		memberBean.setPhone(memberDTO.getPhone());
+		memberBean.setAddress(memberDTO.getAddress());
+		memberBean.setUsername(memberDTO.getUsername());
+		memberBean.setPassword(memberDTO.getPassword());
+		memberBean.setEnabled(memberDTO.getEnabled());
+		memberBean.setOrganizationId(memberDTO.getOrganizationDTO() != null ? memberDTO.getOrganizationDTO().getId() : null);
+		List<GroupMemberBean> grpMbrBean = new ArrayList<>();
+		if (memberDTO.getGroupMemberDTOList() != null) {
+			memberDTO.getGroupMemberDTOList().forEach(grpMbrDTO -> grpMbrBean.add(toGroupMemberBean(grpMbrDTO)));
+		}
+		memberBean.setMemberGroups(grpMbrBean);
+		memberBean.setLastUpdated(memberDTO.getLastUpdated() != null ? memberDTO.getLastUpdated().atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime() : null);
+		return memberBean;
 	}
 	
 	public static AuthorityGroupBean toAuthorityGroupBean(final AuthorityGroupDTO authGrpDTO) {
@@ -76,7 +76,7 @@ public final class DTOConverter {
 		GroupMemberBean grpMbrBean = new GroupMemberBean();
 		grpMbrBean.setId(grpMbrDTO.getId());
 		grpMbrBean.setAuthorityGroupId(grpMbrDTO.getAuthorityGroupId().getId());
-		grpMbrBean.setUserId(grpMbrDTO.getUserId().getId());
+		grpMbrBean.setMemberId(grpMbrDTO.getMemberId().getId());
 		grpMbrBean.setLastUpdated(grpMbrDTO.getLastUpdated().atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
 		return grpMbrBean;
 	}

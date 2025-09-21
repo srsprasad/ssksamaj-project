@@ -10,28 +10,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ssksamaj.app.beans.UserBean;
-import org.ssksamaj.app.manager.UserManager;
+import org.ssksamaj.app.beans.MemberBean;
+import org.ssksamaj.app.manager.MemberManager;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/member")
+public class MemberController {
 
 	@Autowired
-	private UserManager userManager;
+	private MemberManager memberManager;
 	
 	@GetMapping(value = "/all", produces = {"application/json"})
-	public ResponseEntity<List<UserBean>> getAll() {
-		return ResponseEntity.ok(userManager.fetchAll());
+	public ResponseEntity<List<MemberBean>> getAll() {
+	return ResponseEntity.ok(memberManager.fetchAll());
 	}
 	
 	@GetMapping(value = "/find/{id}", produces = {"application/json"})
-	public ResponseEntity<UserBean> find(@PathVariable("id") Integer id) {
-		return ResponseEntity.ok(userManager.find(id));
+	public ResponseEntity<MemberBean> find(@PathVariable("id") Integer id) {
+	return ResponseEntity.ok(memberManager.find(id));
 	}
 	
 	@PostMapping(value = "/create", consumes = {"application/json"})
-	public ResponseEntity<Integer> create(@RequestBody UserBean userBean) {
-		return ResponseEntity.ofNullable(userManager.create(userBean));
+	public ResponseEntity<Integer> create(@RequestBody MemberBean memberBean) {
+	return ResponseEntity.ofNullable(memberManager.create(memberBean));
 	}
 }

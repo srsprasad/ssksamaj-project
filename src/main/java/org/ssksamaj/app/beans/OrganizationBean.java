@@ -18,7 +18,7 @@ public class OrganizationBean implements Serializable {
 	private String address;
 	private String description;
 	private LocalDateTime localDateTime;
-	List<UserBean> allUserBeans;
+	List<MemberBean> allMemberBeans;
 	
 	public Integer getId() {
 		return id;
@@ -56,11 +56,11 @@ public class OrganizationBean implements Serializable {
 	public void setLocalDateTime(LocalDateTime localDateTime) {
 		this.localDateTime = localDateTime;
 	}
-	public List<UserBean> getAllUserBeans() {
-		return allUserBeans;
+	public List<MemberBean> getAllMemberBeans() {
+		return allMemberBeans;
 	}
-	public void setAllUserBeans(List<UserBean> allUserBeans) {
-		this.allUserBeans = allUserBeans;
+	public void setAllMemberBeans(List<MemberBean> allMemberBeans) {
+		this.allMemberBeans = allMemberBeans;
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ public class GroupMemberBean implements Serializable {
 	
 	private Integer id;
 	private Integer authorityGroupId;
-	private Integer userId;
+	private Integer memberId;
 	private LocalDateTime lastUpdated;
 	
 	public Integer getId() {
@@ -24,11 +24,11 @@ public class GroupMemberBean implements Serializable {
 	public void setAuthorityGroupId(Integer authorityGroupId) {
 		this.authorityGroupId = authorityGroupId;
 	}
-	public Integer getUserId() {
-		return userId;
+	public Integer getMemberId() {
+		return memberId;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 	public LocalDateTime getLastUpdated() {
 		return lastUpdated;

@@ -37,7 +37,7 @@ public class OrganizationDTO implements Serializable {
 	private OffsetDateTime lastUpdated;
 	@OneToMany
 	@JoinColumn(name = "ORGN_ID")
-	private List<UserDTO> allUserDTOs;
+	private List<MemberDTO> allMemberDTOs;
 	
 	public Integer getId() {
 		return id;
@@ -94,8 +94,8 @@ public class OrganizationDTO implements Serializable {
 		this.lastUpdated = lastUpdated;
 	}
 	
-	public List<UserDTO> getAllUserDTOs() {
-		return this.allUserDTOs;
+	public List<MemberDTO> getAllMemberDTOs() {
+		return this.allMemberDTOs;
 	}
 
 }

@@ -21,9 +21,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "MEMBER")
 @Access(AccessType.PROPERTY)
-public class UserDTO implements Serializable {
+public class MemberDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -165,7 +165,7 @@ public class UserDTO implements Serializable {
 		this.lastUpdated = lastUpdated;
 	}
 	@OneToMany(orphanRemoval = true)
-	@JoinColumn(name = "USER_ID")
+	@JoinColumn(name = "MEMBER_ID")
 	public Set<GroupMemberDTO> getGroupMemberDTOList() {
 		return groupMemberDTOList;
 	}
