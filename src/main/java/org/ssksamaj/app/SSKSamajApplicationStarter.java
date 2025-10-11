@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.ssksamaj.app"})
-@EnableJpaRepositories(basePackages = "org.ssksamaj.app.persist")
+@ComponentScan(basePackages = {"org.ssksamaj.app", "org.ssksamaj.app.manager.converter"})
+@EnableJpaRepositories(basePackages = "org.ssksamaj.app")
 public class SSKSamajApplicationStarter {
 	private static final Logger LOG = LoggerFactory.getLogger(SSKSamajApplicationStarter.class);
 

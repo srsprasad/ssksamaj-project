@@ -2,6 +2,7 @@ package org.ssksamaj.app.beans;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class OrganizationBean implements Serializable {
 	private String locationName;
 	private String address;
 	private String description;
-	private LocalDateTime localDateTime;
+	private OffsetDateTime localDateTime;
 	private List<MemberBean> allMemberBeans;
 	private List<ChitBean> chits;
 		

@@ -13,7 +13,7 @@ import org.ssksamaj.app.persist.dto.GroupMemberDTO;
 import org.ssksamaj.app.persist.dto.OrganizationDTO;
 import org.ssksamaj.app.persist.dto.MemberDTO;
 
-public final class BeanConverter {
+public final class BeanConverter {/* 
 
 	public static OrganizationDTO toOrganisationDTO(final OrganizationBean orgBean) {
 		OrganizationDTO orgDTO = new OrganizationDTO();
@@ -82,5 +82,5 @@ public final class BeanConverter {
 		grpMbrDTO.setUpdateBy(1);
 		grpMbrDTO.setLastUpdated(OffsetDateTime.now());
 		return grpMbrDTO;
-	}
+	}*/
 }

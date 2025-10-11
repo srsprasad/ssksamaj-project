@@ -2,15 +2,12 @@ package org.ssksamaj.app.persist.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -79,7 +76,7 @@ public class MemberDTO implements Serializable {
 	private int updatedBy;
 	
 	@Column(name = "LAST_UPDATED")
-	private OffsetDateTime lastUpdated;
+	private LocalDate lastUpdated;
 	
 	@OneToMany(orphanRemoval = true)
 	@JoinColumn(name = "MEMBER_ID")

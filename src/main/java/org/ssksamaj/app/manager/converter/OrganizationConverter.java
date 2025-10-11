@@ -11,4 +11,5 @@ public interface OrganizationConverter {
 
     OrganizationBean toBean(OrganizationDTO dto);
     OrganizationDTO toDTO(OrganizationBean bean);
+    
 }

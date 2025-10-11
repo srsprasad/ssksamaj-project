@@ -1,22 +1,9 @@
 package org.ssksamaj.app.manager.converter;
 
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.ssksamaj.app.beans.AuthorityGroupBean;
-import org.ssksamaj.app.beans.GroupAuthorityBean;
-import org.ssksamaj.app.beans.GroupMemberBean;
-import org.ssksamaj.app.beans.OrganizationBean;
-import org.ssksamaj.app.beans.MemberBean;
-import org.ssksamaj.app.persist.dto.AuthorityGroupDTO;
-import org.ssksamaj.app.persist.dto.GroupAuthorityDTO;
-import org.ssksamaj.app.persist.dto.GroupMemberDTO;
-import org.ssksamaj.app.persist.dto.OrganizationDTO;
-import org.ssksamaj.app.persist.dto.MemberDTO;
 
 public final class DTOConverter {
 
+	/*
 	public static OrganizationBean toOrganisationBean(final OrganizationDTO orgDTO) {
 		OrganizationBean orgBean = new OrganizationBean();
 		orgBean.setId(orgDTO.getId());
@@ -54,7 +41,7 @@ public final class DTOConverter {
 		memberBean.setLastUpdated(memberDTO.getLastUpdated() != null ? memberDTO.getLastUpdated().atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime() : null);
 		return memberBean;
 	}
-	
+    
 	public static AuthorityGroupBean toAuthorityGroupBean(final AuthorityGroupDTO authGrpDTO) {
 		AuthorityGroupBean authGrpBean = new AuthorityGroupBean();
 		authGrpBean.setId(authGrpDTO.getId());
@@ -71,7 +58,7 @@ public final class DTOConverter {
 		grpAuthBean.setDescription(grpAuthDTO.getDescription());
 		return grpAuthBean;
 	}
-	
+    
 	public static GroupMemberBean toGroupMemberBean(final GroupMemberDTO grpMbrDTO) {
 		GroupMemberBean grpMbrBean = new GroupMemberBean();
 		grpMbrBean.setId(grpMbrDTO.getId());
@@ -80,4 +67,5 @@ public final class DTOConverter {
 		grpMbrBean.setLastUpdated(grpMbrDTO.getLastUpdated().atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime());
 		return grpMbrBean;
 	}
+	*/
 }
